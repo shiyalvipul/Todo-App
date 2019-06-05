@@ -2,53 +2,53 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../redux/action';
 
-import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
-const useStyles = makeStyles(theme => ({
-	margin: {
-	  margin: theme.spacing(1),
-	},
-	extendedIcon: {
-	  marginRight: theme.spacing(1),
-	},
-  }));
   
 
 class Todo extends Component {
 	
     state = {
-        	title: "",
+					title: "",
+					error:'',
 			}
 	
     onInputChange = (e) => {
-        this.setState({
-            title: e.target.value,
-          });
-    
+					this.setState({
+						title: e.target.value,
+						error:'',
+					});
 		}
+	
+
 
 		onInputKeyUp = (e) => {
-			if (e.keyCode === 13) {
+			if (e.keyCode === 13 && this.state.title !== '') {
 				this.props.addTodo(this.state.title)
 				this.setState({
 					title: "",
+					error:'',
 				});
-			};
+				
+			}
+			else {
+				this.setState({
+					error:'* Please Enter Todo Text',
+				});
+			}
+			
+
 			if (e.keyCode === 27) {
 				this.setState({
-					title: "",
+					title: " ",
+					error:'',
 				});
 			};
 		}
-		btnClick = (e) => {
-			this.props.addTodo(this.state.title)
-				this.setState({
-					title: "",
-				});
-		}
+		
 		//Remove Todo
 		removeTodo = (id) => {
 			this.props.removeTodo(id);
@@ -65,14 +65,17 @@ class Todo extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col-6 todolist ">
-						<h1>TODOS</h1>
+						<h3>TODOS</h3>
 							<input type="text"
 								placeholder="Add todo"
 								value={this.state.title}
 								onChange={this.onInputChange}
 								onKeyUp={this.onInputKeyUp}
 								className="form-control add-todo" 
+								name="add_todo"
+								required
 								/>
+								<span className="error_msg">{this.state.title === '' ? this.state.error : '' }</span>
 								<br></br>
 								<table className="table table-hover">
 								<tbody>
@@ -82,72 +85,34 @@ class Todo extends Component {
 									.filter(todo => !todo.isRemoved)
 									.filter(todo => !todo.isDone)
 									.map(todo => (
-										<tr>
+										<tr key={todo.id}>
 											<td>
 											<div key={todo.id} style={{height: 20}}>
-											<input 
-												type="checkbox" 
-												onChange={(e) => this.checkTodo(todo.id, e)} 
-												checked={todo.isDone} 
-												className="checkbox"
-												/>
+											
+
+											<Checkbox
+															onChange={(e) => this.checkTodo(todo.id, e)} 
+															checked={todo.isDone} 
+															color="primary"
+															className="checkBox"
+														/>
+
 												&nbsp;&nbsp;&nbsp;
-											   <label contentEditable="true">{todo.title}</label>
+											   <label>{todo.title}</label>
 											  
-											   <IconButton aria-label="Delete" style={{float:"right"}}>
-													<DeleteIcon fontSize="small" 
-													onClick={() => this.removeTodo(todo.id)}
-													/>
+											   <IconButton aria-label="Delete" style={{float:"right"}} onClick={() => this.removeTodo(todo.id)} className="delete_btn"> 
+													<DeleteIcon fontSize="small" />
 												</IconButton>
-												{/* <button 
-													onClick={() => this.removeTodo(todo.id)} 
-													className="btn-xs pull-right">
-												</button> */}
 											</div>
 											</td>
 										</tr>
-										
 									))
 								}
 								</tbody>
-								</table>
-
-
-								<br></br>
-								{/* {
-									this.props.todo.length > 0 && 
-									this.props.todo
-									.filter(todo => !todo.isRemoved)
-									.filter(todo => !todo.isDone)
-									.map(todo => (
-										<div key={todo.id} style={{height: 40}}>
-											<hr></hr>
-											<div >
-											<ul className="list-unstyled">
-												<li className="ui-state-default">
-													<label>
-														<input 
-															type="checkbox" 
-															onChange={(e) => this.checkTodo(todo.id, e)} 
-															checked={todo.isDone} 
-															className="checkbox"
-															/>
-															&nbsp;&nbsp;&nbsp;
-															<label contentEditable="true">{todo.title}</label>
-															&nbsp;&nbsp;&nbsp;
-															<button 
-																onClick={() => this.removeTodo(todo.id)} 
-																className="remove-item btn btn-default btn-xs pull-right">Delete
-															</button>
-													</label>
-												</li>
-											</ul>
-											</div>
-										</div>
-									))
-								} */}
-								<br></br><br></br>
-							<div class="todo-footer">
+							</table>
+							<br></br>
+							<br></br><br></br>
+							<div className="todo-footer">
 								<strong>
 								{
 								this.props.todo
@@ -161,23 +126,35 @@ class Todo extends Component {
 					</div>
 					<div className="col-1"></div>
 					<div className="col-5 todolist-done">
-						<h1>Already Done</h1>
+						<h3>Already Done</h3>
+						<table className="table table-hover">
+							<tbody>
 								{
 									this.props.todo.length > 0 && 
 									this.props.todo
 									.filter(todo => todo.isDone)
+									.filter(todo => !todo.isRemoved)
 									.map(todo => (
-										<div key={todo.id}>
-											<ul className="list-unstyled done-items">
-												<li>
-												<input type="checkbox" onChange={(e) => this.checkTodo(todo.id, e)} checked={todo.isDone} />
+										<tr key={todo.id}>
+											<td>
+											<Checkbox
+															onChange={(e) => this.checkTodo(todo.id, e)} 
+															checked={todo.isDone} 
+															color="primary"
+															className="checkBox"
+												/>
 												&nbsp;&nbsp;{todo.title} 
-												</li>
-											</ul>
-										</div>
+												<IconButton aria-label="Delete" style={{float:"right"}} onClick={() => this.removeTodo(todo.id)} className="delete_btn"> 
+													<DeleteIcon fontSize="small" />
+												</IconButton>
+											</td>
+										</tr>
 									))
 								}
-								<div class="todo-footer">
+								</tbody>
+							</table>
+							<br></br><br></br>
+								<div className="todo-footer">
 									<strong>
 									{
 										this.props.todo
