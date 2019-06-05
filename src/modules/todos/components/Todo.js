@@ -65,7 +65,7 @@ class Todo extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col-6 todolist ">
-						<h3>TODOS</h3>
+						<h3>Todos</h3>
 							<input type="text"
 								placeholder="Add todo"
 								value={this.state.title}
@@ -126,7 +126,7 @@ class Todo extends Component {
 					</div>
 					<div className="col-1"></div>
 					<div className="col-5 todolist-done">
-						<h3>Already Done</h3>
+						<h3>Done</h3>
 						<table className="table table-hover">
 							<tbody>
 								{
