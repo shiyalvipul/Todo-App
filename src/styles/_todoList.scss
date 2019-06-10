@@ -1,55 +1,74 @@
-
 .todolist{
     background-color:#FFF;
-    padding:20px 20px 10px 20px;
-    margin-top:30px;
+    padding:10px ;
+    margin:30px;
+    position: fixed;
+    border-radius: 10px;
+    width: 250px;
+    height: 450px;
+    overflow: hidden;
+    overflow-y: scroll;
+	box-shadow: 10px 1px 10px gray;	
+	.add-todo{
+		width: 250px;
+		margin: 2px;
+		>label {
+			font-size: 12px;
+		}
+		> div{
+			>input {
+			width: 250px;
+			padding:5px;
+			}
+		}
+	}
+	.todo-table{
+		>tbody{
+			>.todo-row{
+				&:hover{
+					background-color:honeydew;
+				}
+				>.tod-cell{
+					padding: 0px !important;
+					height: 10px !important;
+					font-size: 12px;
+					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+				}
+			}
+			
+		}
+	}
+	.todo-footer{
+		background-color:#F4FCE8;
+		padding: 0px;
+		position: fixed;
+		bottom: 33px;
+		width: 48vh;
+		font-variant: small-caps;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  	}
+	.error_msg {
+		color: red;
+		font-size: 10px;
+		font-family: cursive;
+	}
+	.checkBox{
+	>span {
+	> svg {
+		width: 15px !important;
+		height: 18px !important;
+	}
+	}
+	}
+	.delete_btn{
+	float: right;
+	padding: 5px !important;
+	}
+
 }
-.todolist-done{
-    background-color:#FFF;
-    padding:20px 20px 10px 20px;
-    margin-top:30px;
-}
-h3{
-    background-color:#F4FCE8;   
-    margin:2;
-    text-align:center;
+::-webkit-scrollbar{
+	width: 0;
+	height: 0;
 }
 
 
-.todo-footer{
-    background-color:#F4FCE8;   
-    margin:0 -20px -10px -20px;
-    padding: 10px 20px;
-    
-}
-button{
-    text-align: center;
-    &:focus {
-        outline: none !important; 
-    }
-}
-
-.error_msg {
-    color: red;
-}
-.table td, .table th {
-     padding: 0 !important;
-     height: 2px !important;
-     font-size: 12px;   
-}
-
-
-.checkBox{
-    >span {
-        > svg {
-            width: 15px !important;
-            height: 18px !important;
-            
-        }
-    }
-    
-}
-.delete_btn{
-    
-    padding: 5px !important;
-}
