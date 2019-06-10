@@ -1,23 +1,24 @@
 .todolist{
     background-color:#FFF;
     padding:10px ;
-    margin:30px;
+    margin:250px;
     position: fixed;
     border-radius: 10px;
-    width: 250px;
+    width: 300px;
     height: 450px;
     overflow: hidden;
     overflow-y: scroll;
-	box-shadow: 10px 1px 10px gray;	
+	box-shadow: 10px 1px 10px gray;
+
 	.add-todo{
-		width: 250px;
+		width: 300px;
 		margin: 2px;
 		>label {
-			font-size: 12px;
+			font-size: 18px;
 		}
 		> div{
 			>input {
-			width: 250px;
+			width: 300px;
 			padding:5px;
 			}
 		}
@@ -31,7 +32,7 @@
 				>.tod-cell{
 					padding: 0px !important;
 					height: 10px !important;
-					font-size: 12px;
+					font-size: 18px;
 					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 				}
 			}
@@ -42,14 +43,14 @@
 		background-color:#F4FCE8;
 		padding: 0px;
 		position: fixed;
-		bottom: 33px;
+		bottom: 220px;
 		width: 48vh;
 		font-variant: small-caps;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   	}
 	.error_msg {
 		color: red;
-		font-size: 10px;
+		font-size: 18px;
 		font-family: cursive;
 	}
 	.checkBox{

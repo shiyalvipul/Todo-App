@@ -12,8 +12,8 @@ import './styles/export.scss';
 
 const App = () => (
   <Provider store={reduxStore}>
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
+    <Grid container spacing={1}>
+      <Grid item xs={3}>
         <TodoContainer />
       </Grid>
       <Grid item xs={6}>

@@ -25,7 +25,7 @@ const Todo = (props) => {
   } = props;
   return (
     <div>
-      <div className="todolist">
+      <div className="todolist" >
         <Header headertext="Todos" />
         <TextField
           id="standard-name"
