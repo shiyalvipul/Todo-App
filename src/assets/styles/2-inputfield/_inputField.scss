@@ -1,0 +1,24 @@
+.add-todo{
+	width: 230px !important;
+	margin: 1px !important;
+	>label {
+		font-size: 18px !important;
+	}
+	> div{
+		>input {
+		width: 220px ;
+		padding:5px ;
+		}
+	}
+		
+}
+.btn-add-todo{
+	margin-top:15px !important;
+	margin-left:1px !important; 
+	background-color:khaki !important;
+}
+.error-msg{
+		color: $err-color;
+		font-size: 18px;
+		font-family: cursive;
+	}
